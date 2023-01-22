@@ -46,7 +46,7 @@ font-size: 25px;
 		<table class="table table-light">
 			<thead>
 				<tr>
-					<th scope="col">Nombree</th>
+					<th scope="col">NombreAlva</th>
 					<th scope="col">Categoria</th>
 					<th scope="col">Precio</th>
 					<th scope="col">Comprar</th>
