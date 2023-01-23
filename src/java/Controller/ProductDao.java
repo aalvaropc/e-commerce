@@ -19,7 +19,7 @@ public class ProductDao {
     
 
 	public ProductDao(Connection con) {
-		super();
+		
 		this.con = con;
 	}
 	
@@ -28,18 +28,22 @@ public class ProductDao {
         List<Product> book = new ArrayList<>();
         try {
 
-            query = "select * from products";
+            query = "select * from Productos";
             pst = this.con.prepareStatement(query);
             rs = pst.executeQuery();
 
             while (rs.next()) {
             	Product row = new Product();
-                row.setId(rs.getInt("id"));
-                row.setName(rs.getString("name"));
-                row.setCategory(rs.getString("category"));
-                row.setPrice(rs.getDouble("price"));
+                row.setId(rs.getInt("idProducto"));
+                row.setName(rs.getString("Nombre"));
+                row.setDescription(rs.getString("Descripcion"));
+                row.setCategory(rs.getString("Categorias"));
+                row.setPrice(rs.getDouble("Precio"));
+                row.setExist(rs.getInt("Exist"));
+                row.setMarcas(rs.getString("Marcas"));
+                row.setOrders(rs.getString("Pedidos"));
                 row.setImage(rs.getString("image"));
-
+ 
                 book.add(row);
             }
 
@@ -54,7 +58,7 @@ public class ProductDao {
 	 public Product getSingleProduct(int id) {
 		 Product row = null;
 	        try {
-	            query = "select * from products where id=? ";
+	            query = "select * from Productos where idProducto=? ";
 
 	            pst = this.con.prepareStatement(query);
 	            pst.setInt(1, id);
@@ -62,11 +66,15 @@ public class ProductDao {
 
 	            while (rs.next()) {
 	            	row = new Product();
-	                row.setId(rs.getInt("id"));
-	                row.setName(rs.getString("name"));
-	                row.setCategory(rs.getString("category"));
-	                row.setPrice(rs.getDouble("price"));
-	                row.setImage(rs.getString("image"));
+	                row.setId(rs.getInt("idProducto"));
+                        row.setName(rs.getString("Nombre"));
+                        row.setDescription(rs.getString("Descripcion"));
+                        row.setCategory(rs.getString("Categorias"));
+                        row.setPrice(rs.getDouble("Precio"));
+                        row.setExist(rs.getInt("Exist"));
+                        row.setMarcas(rs.getString("Marcas"));
+                        row.setOrders(rs.getString("Pedidos"));
+                        row.setImage(rs.getString("image"));
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -81,12 +89,12 @@ public class ProductDao {
         try {
             if (cartList.size() > 0) {
                 for (Cart item : cartList) {
-                    query = "select price from products where id=?";
+                    query = "select Precio from Productos where idProducto=?";
                     pst = this.con.prepareStatement(query);
                     pst.setInt(1, item.getId());
                     rs = pst.executeQuery();
                     while (rs.next()) {
-                        sum+=rs.getDouble("price")*item.getQuantity();
+                        sum+=rs.getDouble("Precio")*item.getQuantity();
                     }
 
                 }
@@ -105,16 +113,21 @@ public class ProductDao {
         try {
             if (cartList.size() > 0) {
                 for (Cart item : cartList) {
-                    query = "select * from products where id=?";
+                    query = "select * from Productos where idProducto=?";
                     pst = this.con.prepareStatement(query);
                     pst.setInt(1, item.getId());
                     rs = pst.executeQuery();
                     while (rs.next()) {
                         Cart row = new Cart();
-                        row.setId(rs.getInt("id"));
-                        row.setName(rs.getString("name"));
-                        row.setCategory(rs.getString("category"));
-                        row.setPrice(rs.getDouble("price")*item.getQuantity());
+                        row.setId(rs.getInt("idProducto"));
+                        row.setName(rs.getString("Nombre"));
+                        row.setDescription(rs.getString("Descripcion"));
+                        row.setCategory(rs.getString("Categorias"));
+                        row.setPrice(rs.getDouble("Precio"));
+                        row.setExist(rs.getInt("Exist"));
+                        row.setMarcas(rs.getString("Marcas"));
+                        row.setOrders(rs.getString("Pedidos"));
+                        row.setImage(rs.getString("image"));
                         row.setQuantity(item.getQuantity());
                         book.add(row);
                     }

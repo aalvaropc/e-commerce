@@ -17,7 +17,7 @@ public class UserDao {
     public User userLogin(String email, String password) {
             User user = null;
         try {
-            query = "select * from users where email=? and password=?";
+            query = "select * from usuario where email=? and Contraseña=?";
             pst = this.con.prepareStatement(query);
             pst.setString(1, email);
             pst.setString(2, password);
@@ -25,8 +25,8 @@ public class UserDao {
             
             if(rs.next()){
                 user = new User();
-                user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
+                user.setId(rs.getInt("idUsuario"));
+                user.setName(rs.getString("Nombre"));
                 user.setEmail(rs.getString("email"));
             }
             

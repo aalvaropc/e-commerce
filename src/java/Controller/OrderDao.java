@@ -5,10 +5,11 @@
 package Controller;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.sql.PreparedStatement;
 
 import Model.*;
 
@@ -17,8 +18,9 @@ public class OrderDao {
 	private Connection con;
 
 	private String query;
-    private PreparedStatement pst;
-    private ResultSet rs;
+        private Statement st;
+        private ResultSet rs;
+        private PreparedStatement pst;
     
     
 
@@ -30,13 +32,10 @@ public class OrderDao {
 	public boolean insertOrder(Order model) {
         boolean result = false;
         try {
-            query = "insert into orders (p_id, u_id, o_quantity, o_date) values(?,?,?,?)";
-            pst = this.con.prepareStatement(query);
-            pst.setInt(1, model.getId());
-            pst.setInt(2, model.getUid());
-            pst.setInt(3, model.getQunatity());
-            pst.setString(4, model.getDate());
-            pst.executeUpdate();
+            query = "insert into pedidos values ('" + model.getOrderId() + "', '" + model.getQunatity()+ "','"
+                    + model.getDate()+ "', '" + model.getEstadoP()+ "'," + model.getUid()+ ")";
+            st = this.con.createStatement();
+            st.execute(query);
             result = true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -48,22 +47,23 @@ public class OrderDao {
     public List<Order> userOrders(int id) {
         List<Order> list = new ArrayList<>();
         try {
-            query = "select * from orders where u_id=? order by orders.o_id desc";
+            query = "select * from Pedidos where idClientes=? ";
             pst = this.con.prepareStatement(query);
             pst.setInt(1, id);
             rs = pst.executeQuery();
             while (rs.next()) {
                 Order order = new Order();
                 ProductDao productDao = new ProductDao(this.con);
-                int pId = rs.getInt("p_id");
+                int pId = rs.getInt("IdPedidos");
                 Product product = productDao.getSingleProduct(pId);
-                order.setOrderId(rs.getInt("o_id"));
+                order.setOrderId(rs.getInt("Clientes"));
                 order.setId(pId);
                 order.setName(product.getName());
                 order.setCategory(product.getCategory());
-                order.setPrice(product.getPrice()*rs.getInt("o_quantity"));
-                order.setQunatity(rs.getInt("o_quantity"));
-                order.setDate(rs.getString("o_date"));
+                order.setPrice(product.getPrice()*rs.getInt("Cantidad"));
+                order.setQunatity(rs.getInt("Cantidad"));
+                order.setDate(rs.getString("Fechapedido"));
+                order.setEstadoP(rs.getString("EstadoPedido"));
                 list.add(order);
             }
         } catch (Exception e) {
@@ -76,7 +76,7 @@ public class OrderDao {
     public void cancelOrder(int id) {
         //boolean result = false;
         try {
-            query = "delete from orders where o_id=?";
+            query = "delete from Pedidos where idPedidos=?";
             pst = this.con.prepareStatement(query);
             pst.setInt(1, id);
             pst.execute();

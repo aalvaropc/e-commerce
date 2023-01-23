@@ -3,14 +3,15 @@
 <%@page import="Model.*"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" %>
 
 <%
+ DbCon cn=new DbCon();
 User auth = (User) request.getSession().getAttribute("auth");
 if (auth != null) {
     request.setAttribute("person", auth);
 }
-ProductDao pd = new ProductDao(DbCon.getConnection());
+ProductDao pd = new ProductDao(cn.getConnection());
 List<Product> products = pd.getAllProducts();
 ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
 if (cart_list != null) {

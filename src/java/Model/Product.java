@@ -3,24 +3,29 @@ package Model;
 public class Product {
 	private int id;
 	private String name;
+        private String description;
 	private String category;
 	private Double price;
+        private int exist;
+        private String marcas;
+        private String orders;
 	private String image;
 	
 	
 	public Product() {
 	}
 
-	
-	public Product(int id, String name, String category, Double price, String image) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.category = category;
-		this.price = price;
-		this.image = image;
-	}
-
+        public Product(int id, String name, String description, String category, Double price, int exist, String marcas, String orders, String image) {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.category = category;
+            this.price = price;
+            this.exist = exist;
+            this.marcas = marcas;
+            this.orders = orders;
+            this.image = image;
+        }
 
 	public int getId() {
 		return id;
@@ -61,6 +66,40 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public int getExist() {
+            return exist;
+        }
+
+        public void setExist(int exist) {
+            this.exist = exist;
+        }
+
+        public String getMarcas() {
+            return marcas;
+        }
+
+        public void setMarcas(String marcas) {
+            this.marcas = marcas;
+        }
+
+        public String getOrders() {
+            return orders;
+        }
+
+        public void setOrders(String orders) {
+            this.orders = orders;
+        }
+
+        
 
 	@Override
 	public String toString() {
