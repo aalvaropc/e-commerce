@@ -1,9 +1,10 @@
 package Model;
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import java.util.logging.Logger;
+import com.mysql.cj.jdbc.Driver;
 public class DbCon {
     private static Connection connection = null;
 	public static Connection getConnection() throws ClassNotFoundException, SQLException{

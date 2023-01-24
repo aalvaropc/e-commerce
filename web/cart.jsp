@@ -24,19 +24,19 @@ if (cart_list != null) {
 %>
 <!DOCTYPE html>
 <html>
-<head>
-<%@include file="/includes/head.jsp"%>
-<title>Amazon</title>
-<style type="text/css">
+    <head>
+    <%@include file="/includes/head.jsp"%>
+    <title>Amazon</title>
+    <style type="text/css">
 
-.table tbody td{
-vertical-align: middle;
-}
-.btn-incre, .btn-decre{
-box-shadow: none;
-font-size: 25px;
-}
-</style>
+    .table tbody td{
+    vertical-align: middle;
+    }
+    .btn-incre, .btn-decre{
+    box-shadow: none;
+    font-size: 25px;
+    }
+    </style>
 </head>
 <body style="overflow: hidden">
 	<%@include file="/includes/navbar.jsp"%>

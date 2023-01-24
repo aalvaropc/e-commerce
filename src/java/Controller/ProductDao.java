@@ -3,20 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
-
 import java.sql.*;
 import java.util.*;
-
 import Model.Cart;
 import Model.Product;
+import Model.ProductAdd;
 
 public class ProductDao {
 	private Connection con;
 
 	private String query;
-    private PreparedStatement pst;
-    private ResultSet rs;
-    
+        private PreparedStatement pst;
+        private ResultSet rs;
+
 
 	public ProductDao(Connection con) {
 		super();
@@ -99,7 +98,6 @@ public class ProductDao {
         return sum;
     }
 
-    
     public List<Cart> getCartProducts(ArrayList<Cart> cartList) {
         List<Cart> book = new ArrayList<>();
         try {
@@ -127,5 +125,20 @@ public class ProductDao {
             System.out.println(e.getMessage());
         }
         return book;
+    }
+
+        public void addProduct(ProductAdd product){
+        try {
+            query = "INSERT INTO products (name, category, price, image) VALUES (?, ?, ?, ?)";
+            pst = con.prepareStatement(query);
+            pst.setString(1, product.getName());
+            pst.setString(2, product.getCategory());
+            pst.setDouble(3, product.getPrice());
+            pst.setString(4, product.getImage());
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -89,10 +89,8 @@ if (cart_list != null) {
 			out.println("No hay productos");
 			}
 			%>
-
 		</div>
 	</div>
-
 	<%@include file="/includes/footer.jsp"%>
 </body>
 </html>

@@ -3,22 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
-
 public class User {
 	private int id;
 	private String name;
 	private String email;
 	private String password;
-
+        private String role;
 	public User() {
 	}
 
-	public User(int id, String name, String email, String password) {
+	public User(int id, String name, String email, String password, String role) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-	}
+                this.role = role;
+                
+	} 
 
 	public int getId() {
 		return id;
@@ -30,6 +31,14 @@ public class User {
 
 	public String getName() {
 		return name;
+	}
+        
+        public String getRole() {
+            return role;
+	}
+        
+        public void setRole(String role) {
+		this.role = role;
 	}
 
 	public void setName(String name) {
@@ -54,7 +63,6 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password+ "]";
 	}
-	
 }

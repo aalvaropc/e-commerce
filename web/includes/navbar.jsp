@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg " style="background-color: #232F3E; height: 80px">
+<nav class="navbar navbar-expand-lg " style="background-color: #232F3E; height: 120px">
 	<div class="container">
             <a class="navbar-brand" href="index.jsp"><img src="product-image/amazon_logo2.jpg" alt="Amazon logo" style="width: 120px"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
